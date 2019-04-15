@@ -1,3 +1,5 @@
+"""Model and database functions for the Sasquatch Sitings website"""
+
 from flask_sqlalchemy import flask_sqlalchemy
 
 db = SQLAlchemy()
@@ -5,14 +7,57 @@ db = SQLAlchemy()
 class = User(db.Model):
     """User of the Sasquatch Sightings website"""
 
+    __tablename__ = "users"
+
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     fname = db.Column(db.String(64))
     lname = db.Column(db.String(64))
     email = db.Column(db.String(100), nullable=False)
 
+    def __repr__(self):
+        """Prints readable info about users"""
+
+        return "user_id: {}, name: {} {}, email: {}".format(self.user_id,
+            self.fname,
+            self.lname,
+            self.email)
 
 
 class = Sightings(db.Model):
+    """A sighting recorded on the Sasquatch Sightings website"""
+
+    __tablename__ = "sightings"
 
     sighting_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    lat = db.Column(db.Integer(100))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    latitude = db.Column(db.Integer(100))
+    longitude = db.Column(db.Integer(100))
+    date = db.Column(db.DateTime)
+    event_desc = db.Column(db.String(4000))
+
+    def __repr__(self):
+        """Prints readable info about sightings without description"""
+
+        return "ID: {}, user_id: {}, lat: {}, long: {}, date: {}".format(self.sighting_id,
+            self.user_id,
+            self.latitude,
+            self.longitude,
+            self.date)
+
+
+def connect_to_db(app):
+    """Connect the database to the Flask app."""
+
+    # Configure to use our PostgreSQL database
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///sasquatch'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = app
+    db.init_app(app)
+
+
+if __name__ == "__main__":
+    """Lets me interact with the database if run interactively"""
+
+    from server import app
+    connect_to_db(app)
+    print("Connected to DB.")
