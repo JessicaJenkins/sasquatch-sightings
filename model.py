@@ -58,6 +58,6 @@ def connect_to_db(app):
 if __name__ == "__main__":
     """Lets me interact with the database if run interactively"""
 
-    # from server import app
+    from server import app
     connect_to_db(app)
     print("Connected to DB.")
