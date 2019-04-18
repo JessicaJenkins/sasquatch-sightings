@@ -1,10 +1,10 @@
 """Model and database functions for the Sasquatch Sitings website"""
 
-from flask_sqlalchemy import flask_sqlalchemy
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class = User(db.Model):
+class User(db.Model):
     """User of the Sasquatch Sightings website"""
 
     __tablename__ = "users"
@@ -23,15 +23,15 @@ class = User(db.Model):
             self.email)
 
 
-class = Sightings(db.Model):
+class Sightings(db.Model):
     """A sighting recorded on the Sasquatch Sightings website"""
 
     __tablename__ = "sightings"
 
     sighting_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    latitude = db.Column(db.Integer(100))
-    longitude = db.Column(db.Integer(100))
+    latitude = db.Column(db.Integer)
+    longitude = db.Column(db.Integer)
     date = db.Column(db.DateTime)
     event_desc = db.Column(db.String(4000))
 
@@ -58,6 +58,6 @@ def connect_to_db(app):
 if __name__ == "__main__":
     """Lets me interact with the database if run interactively"""
 
-    from server import app
+    # from server import app
     connect_to_db(app)
     print("Connected to DB.")
