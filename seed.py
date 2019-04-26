@@ -10,8 +10,19 @@ from server import app
 def read_in_sighting_data(path1, path2):
     """Reads in csv file without description and location description data"""
 
-    for row in open(path1):
+    path2_lines = [line.strip("\n") for line in open(path2)]
+
+    for index, row in enumerate(open(path1)):
         row = row.strip().split(",")
+        desc_row = path2_lines[index]
+
+        if desc_row[0].isalpha():
+            description = desc_row[:-2]
+        else:
+            description = desc_row[1:-3]
+
+        if not description.endswith("."):
+            description += "."
 
         lat, lng, date = row
 
@@ -26,27 +37,12 @@ def read_in_sighting_data(path1, path2):
         else:
             date = None
 
-        sighting_set = Sightings(lat=lat,
+        sighting = Sightings(lat=lat,
                             lng=lng,
-                            date=date)
+                            date=date,
+                            event_desc=description)
 
-        db.session.add(sighting_set)
-
-
-    for row in open(path2):
-        
-        if row[0].isalpha():
-            description = row[:-2]
-        else:
-            description = row[1:-3]
-
-        if not description.endswith("."):
-            description += "."
-
-        sighting_desc = Sightings(event_desc=description)
-
-        db.session.add(sighting_desc)
-
+        db.session.add(sighting)
     
     db.session.commit()
 
