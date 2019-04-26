@@ -30,18 +30,18 @@ class Sightings(db.Model):
 
     sighting_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    latitude = db.Column(db.Integer)
-    longitude = db.Column(db.Integer)
+    lat = db.Column(db.String(2500))
+    lng = db.Column(db.String(2500))
     date = db.Column(db.DateTime)
-    event_desc = db.Column(db.String(4000))
+    event_desc = db.Column(db.Text)
 
     def __repr__(self):
         """Prints readable info about sightings without description"""
 
         return "ID: {}, user_id: {}, lat: {}, long: {}, date: {}".format(self.sighting_id,
             self.user_id,
-            self.latitude,
-            self.longitude,
+            self.lat,
+            self.lng,
             self.date)
 
 
