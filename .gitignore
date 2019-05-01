@@ -1,5 +1,4 @@
 *.pyc
-requirements.txt
 env/
 gmaps-api-key.txt.rtf
 .DS_Store
