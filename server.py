@@ -8,7 +8,7 @@ from model import connect_to_db, db, Sightings, User
 app = Flask(__name__)
 
 app.secret_key = "this-is-my-bigfoot"
-# app.jinja_env.undefined = StrictUndefined
+app.jinja_env.undefined = StrictUndefined
 
 @app.route("/")
 def index():
@@ -19,22 +19,22 @@ def index():
 # def returns_home(id):
 
 
-@app.route("/api/sightings")
-def show_sightings():
-    """JSON information about sightings"""
+# @app.route("/api/sightings")
+# def show_sightings():
+#     """JSON information about sightings"""
 
-    sightings = [
-        {
-            "sightingId": sighting.sighting_id,
-            "userID": sighting.user_id,
-            "sightingLat": sighting.lat,
-            "sightingLng": sighting.lng,
-            "sightingDate": sighting.date
-        }
-        for sighting in Sightings.query.limit(50)
-    ]
+#     sightings = [
+#         {
+#             "sightingId": sighting.sighting_id,
+#             "userID": sighting.user_id,
+#             "sightingLat": sighting.lat,
+#             "sightingLng": sighting.lng,
+#             "sightingDate": sighting.date
+#         }
+#         for sighting in Sightings.query.limit(50)
+#     ]
 
-    return jsonify(sightings)
+#     return jsonify(sightings)
 
 
 @app.route("/event<event_id>")

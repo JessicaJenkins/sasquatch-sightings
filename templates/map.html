@@ -1,14 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'map-base.html' %}
 {% block head %}
 {{ super() }}
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script async src="/static/js/map.js"></script>
 {% endblock %}
 
 {% block body %}
 <main>
     <nav class="ui">
-      <section class="ui"></section>
+      <section class="ui">
+        <p>Demo options: </p>
+        {% block demo_options %}
+        {% endblock %}
+      </section>
       <section id="go-home"><a href="/">home</a></section>
     </nav>
     <section class="map">
@@ -20,8 +22,6 @@
 {% endblock %}
 
 {% block scripts %}
-  <script
-    async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0RxTzsXse4XH81LWBShYzv8gyLynrWuE&callback=initMap">
-  </script>
+  <script src="/static/js/map.js"></script>
+  {{ super() }}
 {% endblock %}
