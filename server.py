@@ -13,7 +13,7 @@ app.secret_key = "this-is-my-bigfoot"
 @app.route("/")
 def index():
 
-    return render_template("index.html")
+    return render_template("map.html")
 
 # @app.route("/home/<id>")
 # def returns_home(id):
@@ -21,7 +21,20 @@ def index():
 
 @app.route("/api/sightings")
 def show_sightings():
-    pass
+    """JSON information about sightings"""
+
+    sightings = [
+        {
+            "sightingId": sighting.sighting_id,
+            "userID": sighting.user_id,
+            "sightingLat": sighting.lat,
+            "sightingLng": sighting.lng,
+            "sightingDate": sighting.date
+        }
+        for sighting in Sightings.query.limit(50)
+    ]
+
+    return jsonify(sightings)
 
 
 @app.route("/event<event_id>")
