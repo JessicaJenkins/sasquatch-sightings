@@ -19,22 +19,27 @@ def index():
 # def returns_home(id):
 
 
-# @app.route("/api/sightings")
-# def show_sightings():
-#     """JSON information about sightings"""
+@app.route("/api/sightings")
+def show_sightings():
+    """JSON information about sightings"""
+    sightings = Sightings.query.limit(50)
+    
+    returned = [] 
+    
+    for sighting in sightings:
+        if not sighting.lat:
+            continue
+        sightings_dict = {
+            "sightingId": sighting.sighting_id,
+            "userID": sighting.user_id,
+            "sightingLat": sighting.lat,
+            "sightingLng": sighting.lng,
+            "sightingDate": sighting.date
+            }
 
-#     sightings = [
-#         {
-#             "sightingId": sighting.sighting_id,
-#             "userID": sighting.user_id,
-#             "sightingLat": sighting.lat,
-#             "sightingLng": sighting.lng,
-#             "sightingDate": sighting.date
-#         }
-#         for sighting in Sightings.query.limit(50)
-#     ]
+        returned.append(sightings_dict)
 
-#     return jsonify(sightings)
+    return jsonify(returned)
 
 
 @app.route("/event<event_id>")
@@ -43,10 +48,9 @@ def show_event_details(event_id):
 
 
 if __name__ == "__main__":
-    
     app.debug = True
     
     connect_to_db(app)
-    DebugToolbarExtension(app)
+    # DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")

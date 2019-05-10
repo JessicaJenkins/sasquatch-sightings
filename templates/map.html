@@ -1,27 +1,13 @@
-{% extends 'map-base.html' %}
-{% block head %}
-{{ super() }}
-{% endblock %}
-
-{% block body %}
-<main>
-    <nav class="ui">
-      <section class="ui">
-        <p>Demo options: </p>
-        {% block demo_options %}
-        {% endblock %}
-      </section>
-      <section id="go-home"><a href="/">home</a></section>
-    </nav>
-    <section class="map">
-      {% block map %}
-        <div id="map"></div>
-      {% endblock %}
-    </section>
-  </main>
-{% endblock %}
-
-{% block scripts %}
-  <script src="/static/js/map.js"></script>
-  {{ super() }}
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script async src="/static/js/map.js"></script>
+</head>
+<body>
+  <div id="map"></div>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0RxTzsXse4XH81LWBShYzv8gyLynrWuE&callback=initMap"></script>
+</body>
+</html>
