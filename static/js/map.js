@@ -11,8 +11,9 @@ function initMap() {
   $.get('/api/sightings', (sightings) => {
     
     for (let sighting of sightings) {
+      console.log(sighting.sightingDate)
       const marker = new google.maps.Marker({
-        position: new google.maps.LatLng(sighting.lat, sighting.lng),
+        position: new google.maps.LatLng(sighting.sightingLat, sighting.sightingLng),
         map: map,
         icon: {
           url: '/static/img/white-marker.png',
@@ -29,7 +30,7 @@ function initMap() {
           >
         </div>
         <ul class="sighting-info">
-          <li><b>Date: </b>${sighting.date}</li>
+          <li><b>Date: </b>${sighting.sightingDate}</li>
           <li><b>Description: </b>LINK HERE</li>
         </ul>
       </div>`;
