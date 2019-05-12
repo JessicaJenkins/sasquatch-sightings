@@ -22,7 +22,7 @@ def index():
 @app.route("/api/sightings")
 def show_sightings():
     """JSON information about sightings"""
-    sightings = Sightings.query.limit(50)
+    sightings = Sightings.query.all()
     
     returned = [] 
     
