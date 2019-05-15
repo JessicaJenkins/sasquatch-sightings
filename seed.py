@@ -65,4 +65,11 @@ def read_in_sighting_data(path1, path2):
 
 if __name__ == "__main__":
     connect_to_db(app)
-    db.create_all()
+    # db.create_all()
+
+    path1 = "data/bf-lat-long-date.csv"
+    path2 = "data/bf-descriptions.csv"
+
+    read_in_sighting_data(path1, path2)
+
+    print("Database seeded")

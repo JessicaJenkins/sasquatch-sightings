@@ -10,16 +10,15 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    fname = db.Column(db.String(64))
-    lname = db.Column(db.String(64))
+    name = db.Column(db.String(64))
     email = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(64), nullable=False)
 
     def __repr__(self):
         """Prints readable info about users"""
 
         return "user_id: {}, name: {} {}, email: {}".format(self.user_id,
-            self.fname,
-            self.lname,
+            self.name,
             self.email)
 
 
