@@ -10,13 +10,26 @@ app = Flask(__name__)
 app.secret_key = "this-is-my-bigfoot"
 app.jinja_env.undefined = StrictUndefined
 
+
 @app.route("/")
 def index():
+    """Shows signup form for user"""
+    return render_template("home.html")
 
+
+@app.route("/register", methods=['POST'])
+def register_process():
+    """"""
+
+    email = request.form["email"]
+    password = request.form["password"]
+
+    new_user = User()
+
+
+@app.route("/map")
+def display_map():
     return render_template("map.html")
-
-# @app.route("/home/<id>")
-# def returns_home(id):
 
 
 @app.route("/api/sightings")
@@ -42,9 +55,12 @@ def show_sightings():
     return jsonify(returned)
 
 
-@app.route("/event<event_id>")
-def show_event_details(event_id):
-    pass
+@app.route("/sighting/<sighting_id>")
+def show_event_details(sighting_id):
+    
+    sighting = Sightings.query.get(sighting_id)
+
+    return render_template("sighting.html", sighting=sighting)
 
 
 if __name__ == "__main__":

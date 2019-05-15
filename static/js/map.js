@@ -37,7 +37,9 @@ function initMap() {
         </div>
         <ul class="sighting-info">
           <li><b>Date: </b>${sighting.sightingDate}</li>
-          <li><b>Description: </b>LINK HERE</li>
+          <li><b>Description: </b><a href = '/sighting/${sighting.sightingId}'>
+          Sighting description</a>
+          </li>
         </ul>
       </div>`;
 
