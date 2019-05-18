@@ -17,7 +17,7 @@ class User(db.Model):
     def __repr__(self):
         """Prints readable info about users"""
 
-        return "user_id: {}, name: {} {}, email: {}".format(self.user_id,
+        return "user_id: {}, name: {}, email: {}".format(self.user_id,
             self.name,
             self.email)
 

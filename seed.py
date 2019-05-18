@@ -47,22 +47,6 @@ def read_in_sighting_data(path1, path2):
     db.session.commit()
 
 
-# def read_in_description(description_file):
-#     """Reads in description data for corresponding sightings"""
-
-#     for i, row in enumerate(open(description_file)):
-#         if row[0].isalpha():
-#             description = row[:-2]
-#         else:
-#             description = row[1:-3]
-
-#         if not description.endswith("."):
-#             description += "."
-
-#         db.session.update(sightings).where(sightings.sighting_id==i).values(event_desc=description)
-
-
-
 if __name__ == "__main__":
     connect_to_db(app)
     # db.create_all()

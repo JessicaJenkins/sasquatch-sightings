@@ -1,5 +1,5 @@
 from jinja2 import StrictUndefined
-from flask import Flask, render_template, jsonify
+from flask import Flask, jsonify, render_template, request, flash, redirect, session, Markup
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, Sightings, User
@@ -11,20 +11,63 @@ app.secret_key = "this-is-my-bigfoot"
 app.jinja_env.undefined = StrictUndefined
 
 
-@app.route("/")
-def index():
-    """Shows signup form for user"""
-    return render_template("home.html")
+@app.route("/register")
+def register_form():
+    """Shows signup form for new user"""
+    return render_template("register.html")
 
 
-@app.route("/register", methods=['POST'])
+@app.route("/register", methods=["POST"])
 def register_process():
-    """"""
+    """Allows new user to register"""
 
-    email = request.form["email"]
-    password = request.form["password"]
+    name = request.form.get("name")
+    email = request.form.get("email")
+    password = request.form.get("password")
 
-    new_user = User()
+    existing_user = User.query.filter_by(email=email).first()
+
+    new_user = User(name=name, email=email, password=password)
+
+    if new_user.email == existing_user.email:
+        flash(Markup("This email address is already in use. Please <a href="/login">login</a>"))
+        return redirect("/register")
+    else:
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash("Thanks for signing up!")
+        return redirect("/map")
+
+
+@app.route("/login")
+def display_login_form():
+    """Shows existing user login form"""
+
+    return render_template("login.html")
+
+
+@app.route("/login", methods=["POST"])
+def log_in_user():
+    """Signs in existing user, or prompts them to sign up."""
+
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        flash("No account found with that email address.")
+        return redirect("/login")
+
+    if user.password != password:
+        flash("Password incorrect")
+        return redirect("/login")
+
+    session["user_id"] = user.user_id
+
+    flash("Welcome back, {}!".format(user.name))
+    return redirect("/map")
 
 
 @app.route("/map")

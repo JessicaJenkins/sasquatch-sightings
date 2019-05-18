@@ -6,8 +6,21 @@
 <body>
     <h1>Register</h1>
 
-    <form action="register" method="POST">
-        <div>
+    <div>
+      {% for flash in get_flashed_messages() %}
+      {{ flash }}
+      {% endfor %}
+    </div>
+
+    <form action="/register" method="POST">
+    <div>
+    <label>
+      Name
+      <input type="name" name="name">
+    </label>
+  </div>
+
+  <div>
     <label>
       Email
       <input type="email" name="email">
@@ -20,11 +33,11 @@
       <input type="password" name="password">
     </label>
   </div>
-    </form>
     
   <div>
-    <input type="submit" value="Register">
+    <input type="submit" value="Register right now you silly goose">
   </div>
+  </form>
 
 </body>
 </html>
