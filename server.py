@@ -30,7 +30,7 @@ def register_process():
     new_user = User(name=name, email=email, password=password)
 
     if new_user.email == existing_user.email:
-        flash(Markup("This email address is already in use. Please <a href="/login">login</a>"))
+        flash("This email address is already in use.")
         return redirect("/register")
     else:
         db.session.add(new_user)
@@ -96,6 +96,11 @@ def show_sightings():
         returned.append(sightings_dict)
 
     return jsonify(returned)
+
+
+@app.route("/add_sighting")
+def add_new_sighting():
+    pass
 
 
 @app.route("/sighting/<sighting_id>")
