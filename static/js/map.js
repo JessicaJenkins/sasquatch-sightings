@@ -49,7 +49,8 @@ function initMap() {
         infoWindow.open(map, marker);
       });
     }
-  var markerCluster = new MarkerClusterer(map, markers,
+  console.log('>>>>> markers', markers)
+  const markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
   });
 }

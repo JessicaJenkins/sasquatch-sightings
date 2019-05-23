@@ -3,7 +3,7 @@
 import datetime
 
 from model import User, Sightings, connect_to_db, db
-from sqlalchemy import update
+from sqlalchemy import update, func
 from server import app
 
 
@@ -47,13 +47,27 @@ def read_in_sighting_data(path1, path2):
     db.session.commit()
 
 
+def set_val_sighting_id():
+    """Set value for the next user_id after seeding database"""
+
+    # Get the Max user_id in the database
+    result = db.session.query(func.max(Sightings.sighting_id)).one()
+    max_id = int(result[0])
+
+    # Set the value for the next user_id to be max_id + 1
+    query = "select setval('sightings_sighting_id_seq', :new_id)"
+    db.session.execute(query, {'new_id': max_id + 1})
+    db.session.commit()
+
+
 if __name__ == "__main__":
     connect_to_db(app)
-    # db.create_all()
+    db.create_all()
 
     path1 = "data/bf-lat-long-date.csv"
     path2 = "data/bf-descriptions.csv"
 
     read_in_sighting_data(path1, path2)
+    set_val_sighting_id()
 
     print("Database seeded")

@@ -66,13 +66,15 @@ def log_in_user():
 
     session["user_id"] = user.user_id
 
-    flash("Welcome back, {}!".format(user.name))
     return redirect("/map")
 
 
 @app.route("/map")
 def display_map():
+    """Displays Google Map with markers."""
+
     return render_template("map.html")
+
 
 
 @app.route("/api/sightings")
@@ -99,6 +101,13 @@ def show_sightings():
 
 
 @app.route("/add_sighting")
+def show_new_sighting_form():
+    """Displays form to add a new sighting"""
+    
+    return render_template("add_sighting.html")
+
+
+@app.route("/add_sighting" methods=["POST"])
 def add_new_sighting():
     pass
 
