@@ -33,7 +33,7 @@ def read_in_sighting_data(path1, path2):
             lng = None
 
         if date:
-            date = datetime.datetime.strptime(date, "%Y-%m-%d")
+            date = datetime.datetime.strptime(date, "%Y-%m-%d").date()
         else:
             date = None
 

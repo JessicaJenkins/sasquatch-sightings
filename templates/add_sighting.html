@@ -2,28 +2,40 @@
 <html>
 <head>
     <title>Seeking Sasquatch</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
 </head>
 <body>
     <h1>Record a sighting</h1>
 
     <form action="/add_sighting" method="POST">
 
-    <div>
-      <label>Date:
-        <input name="date" type="datetime">
-      </label>
-    </div>
-    <!-- Add name -->
-    <!-- Add date -->
-    <!-- Select location -->
-    <div>
-      <label>Description: <br>
-      <textarea name="description" rows="4" cols="50"
-        placeholder="Tell us what you saw.">
+  <div>
+    <label>Description: <br>
+      <textarea name="description" rows="4" cols="50" placeholder="Tell us what you saw.">
       </textarea>
     </label>
   </div>
+
+    <div>
+      <label>Date:
+        <input name="date" type="text" id="datepicker" required>
+      </label>
+    </div>
+    <input type="submit" value="Submit">
     </form>
+
+    <!-- Create add_sighting.js file -->
+    <!-- Ask user for permission to geolocate on this page -->
+    <!-- If user refuses, have map set default -->
+    <!-- C/P usable JS code for place searches, so user can place marker -->
+    <!-- Save marker coordinates to variable accessible by flask -->
+    <!-- Move ugly ass datepicker functions far the fuck away from this html file -->
 
 </body>
 </html>

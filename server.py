@@ -1,3 +1,4 @@
+import datetime
 from jinja2 import StrictUndefined
 from flask import Flask, jsonify, render_template, request, flash, redirect, session, Markup
 from flask_debugtoolbar import DebugToolbarExtension
@@ -92,7 +93,7 @@ def show_sightings():
             "userID": sighting.user_id,
             "sightingLat": sighting.lat,
             "sightingLng": sighting.lng,
-            "sightingDate": sighting.date
+            "sightingDate": sighting.date.strftime("%A, %b %d, %Y")
             }
 
         returned.append(sightings_dict)
@@ -107,9 +108,19 @@ def show_new_sighting_form():
     return render_template("add_sighting.html")
 
 
-@app.route("/add_sighting" methods=["POST"])
+@app.route("/add_sighting", methods=["POST"])
 def add_new_sighting():
-    pass
+    """Gives registered users the ability to add a new sighting."""
+
+    date = request.form.get("date")
+    date = datetime.datetime.strptime(date, "%m/%d/%Y").date()
+
+    description = request.form.get("description")
+
+    new_sighting = Sightings(date=date, description=description)
+
+    return redirect("/")
+
 
 
 @app.route("/sighting/<sighting_id>")

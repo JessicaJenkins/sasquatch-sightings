@@ -31,7 +31,7 @@ class Sightings(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     lat = db.Column(db.String(2500))
     lng = db.Column(db.String(2500))
-    date = db.Column(db.DateTime)
+    date = db.Column(db.Date)
     event_desc = db.Column(db.Text)
 
     def __repr__(self):
