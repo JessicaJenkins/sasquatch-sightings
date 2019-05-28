@@ -1,3 +1,4 @@
+# import cloudinary
 import datetime
 from jinja2 import StrictUndefined
 from flask import Flask, jsonify, render_template, request, flash, redirect, session, Markup
