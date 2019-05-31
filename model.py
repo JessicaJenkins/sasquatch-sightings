@@ -32,6 +32,7 @@ class Sightings(db.Model):
     lat = db.Column(db.String(2500))
     lng = db.Column(db.String(2500))
     date = db.Column(db.Date)
+    image = db.Column(db.String(2500))
     event_desc = db.Column(db.Text)
 
     def __repr__(self):
