@@ -108,3 +108,7 @@ var handleFiles = function(files) {
     uploadFile(files[i]); // call the function to upload the file
   }
 };
+
+// JS FOR MAP MARKER PLACEMENT AND GEOLOCATION
+
+
