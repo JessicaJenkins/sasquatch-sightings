@@ -1,6 +1,5 @@
 import requests
 import datetime
-import base64
 from jinja2 import StrictUndefined
 from flask import Flask, jsonify, render_template, request, flash, redirect, session, Markup
 from flask_debugtoolbar import DebugToolbarExtension
@@ -114,34 +113,26 @@ def show_new_sighting_form():
 def add_new_sighting():
     """Gives registered users the ability to add a new sighting."""
 
+    # if user_id in session:
+    #     user_id = user_id
+
+    # user_id = session.get("user_id")
+
+    lat = request.form.get("new_lat")
+    lng = request.form.get("new_lng")
     date = request.form.get("date")
     date = datetime.datetime.strptime(date, "%m/%d/%Y").date()
-
-    description = request.form.get("description")
-    # img_url = request.files["file"].read()
-    # img_string = base64.b64encode(img_url).decode('base64')
-    # print(type(img_string))
-    # print(type(img_url))
-    # url_test = img_url.read()
-    # print(url_test)
-    # print(type(img_url))
-    # test = request.form.get("upload_preset")
     image = request.form.get("new_img")
-    print(image)
-    print(date)
-
-    # print(request.files)
-
-
+    event_desc = request.form.get("description")
+    
     # image_post = requests.post('https://api.cloudinary.com/v1_1/seeking-sasquatch/image/upload', data = {'file':img_string, 'upload_preset':"xrj3dkkq"})
+    # Keeping for my own future reference ^^ Direct api call that hella failed
 
-    # print(image_post.json())
+    new_sighting = Sightings(lat=lat, lng=lng, date=date, image=image, 
+        event_desc=event_desc)
 
-    # print(date)
-    # print(img_url)
-    # print(test)
-
-    # new_sighting = Sightings(date=date, description=description)
+    db.session.add(new_sighting)
+    db.session.commit()
 
     return redirect("/")
 

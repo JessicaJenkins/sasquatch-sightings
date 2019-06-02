@@ -10,6 +10,13 @@ html, body {
   padding: 0;
 }
 
+#map-selector {
+  height: 400px;
+  width: 400px;
+  position: relative;
+  /*z-index: 4;*/
+}
+
 /*Handles styling for image drag and drop on add_sightings page*/
 
 #dropbox { 

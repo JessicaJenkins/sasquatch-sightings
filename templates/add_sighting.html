@@ -6,19 +6,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="static/js/add-sighting.js"></script>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
 </head>
 <body>
     <h1>Record a sighting</h1>
@@ -34,50 +21,6 @@
         <input name="date" type="text" id="datepicker" required>
       </label>
     </div>
-
-    <div id="map"></div>
-    <script>
-      var map, infoWindow;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 6
-        });
-        infoWindow = new google.maps.InfoWindow;
-
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
-
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0RxTzsXse4XH81LWBShYzv8gyLynrWuE&callback=initMap">
-    </script>
-
     <div id="dropbox">
     <div class="form_line">
       <div class="form_controls">
@@ -85,6 +28,8 @@
           <input type="file" id="fileElem" accept="image/*" style="display:none" onchange="handleFiles(this.files)">
           <a href="#" id="fileSelect">Click, or drag and drop to upload an image.</a>
           <input type="hidden" name="new_img" id="new_img" value="replace_url">
+          <input type="hidden" name="new_lat" id="new_lat" value="replace_val">
+          <input type="hidden" name="new_lng" id="new_lng" value="replace_val">
         </div>
       </div>
     </div>
@@ -95,19 +40,14 @@
 </div>
 </div>
 
+<div id="map-selector"></div>
+
 <input type="submit" value="Submit"/>
-    </form>
+  </form>
     
-    
-
-    <!-- Create add_sighting.js file -->
-    <!-- Ask user for permission to geolocate on this page -->
-    <!-- If user refuses, have map set default -->
-    <!-- C/P usable JS code for place searches, so user can place marker -->
+    <!-- Init map, so user can place marker -->
     <!-- Save marker coordinates to variable accessible by flask -->
-    <!-- Move ugly ass datepicker functions far the fuck away from this html file -->
-    <!-- Figure out what the heck this does so I can make image uploading a one step process: -->
-    <!-- https://codepen.io/team/Cloudinary/pen/Edxjbj?editors=0000 -->
 
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0RxTzsXse4XH81LWBShYzv8gyLynrWuE&callback=initMap"></script>
 </body>
 </html>

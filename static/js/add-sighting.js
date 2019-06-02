@@ -1,9 +1,60 @@
+"use strict";
+
 // JS FOR DATEPICKER
 
 $( function() {
     $( "#datepicker" ).datepicker();
   } );
 
+// JS FOR MAP
+
+let map;
+let markers = [];
+      
+function initMap() {
+  let map = new google.maps.Map(document.getElementById('map-selector'), {
+    center: {lat: 46.383744, lng: -122.278250},
+    zoom: 6
+  });
+
+  map.addListener('click', function(e) {
+    if (markers != []) {
+      clearMarkers();
+      deleteMarkers();
+    }
+    placeMarkerAndPanTo(e.latLng, map);
+  });
+}
+
+function placeMarkerAndPanTo(latLng, map) {
+  let marker = new google.maps.Marker({
+    position: latLng,
+    map: map,
+    draggable: true
+  });
+  map.panTo(latLng);
+  markers.push(marker);
+  document.getElementById('new_lat').value = marker.position.lat()
+  document.getElementById('new_lng').value = marker.position.lng()
+}
+
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+function clearMarkers() {
+  setMapOnAll(null);
+}
+
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+}
+
+
+// Need this for recording lat/long - marker.position.lat();
 
 // JS FOR DRAG AND DROP
 
@@ -12,45 +63,43 @@ const unsignedUploadPreset = 'xrj3dkkq';
 
 window.onload = function() {
 
-let fileSelect = document.getElementById("fileSelect");
-console.log(fileSelect)
-let fileElem = document.getElementById("fileElem");
-console.log(fileElem)
+  let fileSelect = document.getElementById("fileSelect");
+  let fileElem = document.getElementById("fileElem");
 
-fileSelect.addEventListener("click", function(e) {
-  if (fileElem) {
-    fileElem.click();
-  }
-  e.preventDefault(); // prevent navigation to "#"
-}, false);
+  fileSelect.addEventListener("click", function(e) {
+    if (fileElem) {
+      fileElem.click();
+    }
+    e.preventDefault(); // prevent navigation to "#"
+  }, false);
 
 
 // ************************ Drag and drop ***************** //
 
-function dragenter(e) {
-  e.stopPropagation();
-  e.preventDefault();
-}
+  function dragenter(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
 
-function dragover(e) {
-  e.stopPropagation();
-  e.preventDefault();
-}
+  function dragover(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
 
-dropbox = document.getElementById("dropbox");
-dropbox.addEventListener("dragenter", dragenter, false);
-dropbox.addEventListener("dragover", dragover, false);
-dropbox.addEventListener("drop", drop, false);
+  let dropbox = document.getElementById("dropbox");
+  dropbox.addEventListener("dragenter", dragenter, false);
+  dropbox.addEventListener("dragover", dragover, false);
+  dropbox.addEventListener("drop", drop, false);
 
-function drop(e) {
-  e.stopPropagation();
-  e.preventDefault();
+  function drop(e) {
+    e.stopPropagation();
+    e.preventDefault();
 
-  let dt = e.dataTransfer;
-  let files = dt.files;
+    let dt = e.dataTransfer;
+    let files = dt.files;
 
-  handleFiles(files);
-}
+    handleFiles(files);
+  }
 }
 
 
@@ -89,6 +138,7 @@ function uploadFile(file) {
       img.src = tokens.join('/');
       img.alt = response.public_id;
       document.getElementById('gallery').appendChild(img);
+      // Sets new image to hidden attribute in HTML file here
       document.getElementById('new_img').value = url;
       document.getElementById('progress').style.width = 0;      
     }
@@ -108,7 +158,3 @@ var handleFiles = function(files) {
     uploadFile(files[i]); // call the function to upload the file
   }
 };
-
-// JS FOR MAP MARKER PLACEMENT AND GEOLOCATION
-
-
