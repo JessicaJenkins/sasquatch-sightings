@@ -1,14 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Seeking Sasquatch</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Seeking Sasquatch</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="/static/css/style.css">
   <script src="https://code.jquery.com/jquery.js"></script>
   <script async src="/static/js/map.js"></script>
+
 </head>
 <body>
+
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Seeking Sasquatch</a>
+    </div>
+    <ul class="nav navbar-nav">
+      {% if "user_id" in session %}
+      <li><a href="/map">View map</a></li>
+      <li><a href="/add_sighting">Record a sighting</a></li>
+      {% else %}
+      <li><a href="/map">View map</a></li>
+      {% endif %}
+    </ul>
+
+    <ul class="nav navbar-right">
+      {% if "user_id" in session %}
+      {% else %}
+      <li><a href="/login"> Log in </a></li>
+      <li><a href="/register"> Sign up </a></li>
+      {% endif %}
+    </ul>
+  </div>
+  </nav>
+
   <div id="map"></div>
-<script src="https://googlemaps.github.io/js-marker-clusterer/src/markerclusterer.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0RxTzsXse4XH81LWBShYzv8gyLynrWuE&callback=initMap"></script>
+
+<!-- For Google Maps -->
+
+  <script src="https://googlemaps.github.io/js-marker-clusterer/src/markerclusterer.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0RxTzsXse4XH81LWBShYzv8gyLynrWuE&callback=initMap"></script>
+
+<!-- For Bootstrap -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 </html>

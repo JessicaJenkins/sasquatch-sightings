@@ -2,6 +2,7 @@
  * element that contains the map. */
 #map {
   height: 100%;
+  box-sizing: content-box;
 }
 /* Optional: Makes the sample page fill the window. */
 html, body {
@@ -14,7 +15,7 @@ html, body {
   height: 400px;
   width: 400px;
   position: relative;
-  /*z-index: 4;*/
+  box-sizing: content-box;
 }
 
 /*Handles styling for image drag and drop on add_sightings page*/
