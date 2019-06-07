@@ -9,6 +9,11 @@
 </head>
 <body>
     <h1>Record a sighting</h1>
+    <div>
+        {% for flash in get_flashed_messages() %}
+        {{ flash }}
+        {% endfor %}
+    </div>
 
     <form action="/add_sighting" method="POST" enctype="multipart/form-data">
   <div>

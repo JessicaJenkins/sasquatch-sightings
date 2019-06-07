@@ -31,7 +31,7 @@ def register_process():
 
     new_user = User(name=name, email=email, password=password)
 
-    if new_user.email == existing_user.email:
+    if existing_user:
         flash("This email address is already in use.")
         return redirect("/register")
     else:
@@ -69,6 +69,13 @@ def log_in_user():
     session["user_id"] = user.user_id
 
     return redirect("/map")
+
+@app.route('/logout')
+def logout():
+    """Signs a user out of the session."""
+
+    del session["user_id"]
+    return redirect("/")
 
 
 @app.route("/map")
@@ -113,10 +120,10 @@ def show_new_sighting_form():
 def add_new_sighting():
     """Gives registered users the ability to add a new sighting."""
 
-    # if user_id in session:
-    #     user_id = user_id
+    user_id = session.get("user_id")
 
-    # user_id = session.get("user_id")
+    if user_id == None:
+        flash("You must have an account, and sign in to record a sighting.")
 
     lat = request.form.get("new_lat")
     lng = request.form.get("new_lng")
@@ -128,7 +135,7 @@ def add_new_sighting():
     # image_post = requests.post('https://api.cloudinary.com/v1_1/seeking-sasquatch/image/upload', data = {'file':img_string, 'upload_preset':"xrj3dkkq"})
     # Keeping for my own future reference ^^ Direct api call that hella failed
 
-    new_sighting = Sightings(lat=lat, lng=lng, date=date, image=image, 
+    new_sighting = Sightings(user_id=user_id, lat=lat, lng=lng, date=date, image=image, 
         event_desc=event_desc)
 
     db.session.add(new_sighting)
