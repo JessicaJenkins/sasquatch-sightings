@@ -7,6 +7,13 @@ function initMap() {
   const map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: centerMapLat, lng: centerMapLng},
     zoom: 10,
+    streetViewControl: false,
+    mapTypeControl: false,
+    fullscreenControl: false,
+    zoomControl: true,
+    zoomControlOptions: {
+        position: google.maps.ControlPosition.TOP_RIGHT
+    },
     styles: [
   {
     "elementType": "geometry",

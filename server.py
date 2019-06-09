@@ -70,7 +70,7 @@ def log_in_user():
 
     return redirect("/map")
 
-@app.route('/logout')
+@app.route("/logout")
 def logout():
     """Signs a user out of the session."""
 
@@ -109,11 +109,11 @@ def show_sightings():
     return jsonify(returned)
 
 
-@app.route("/add_sighting")
+@app.route("/add-sighting")
 def show_new_sighting_form():
     """Displays form to add a new sighting"""
     
-    return render_template("add_sighting.html")
+    return render_template("add-sighting.html")
 
 
 @app.route("/add_sighting", methods=["POST"])
