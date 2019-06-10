@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Seeking Sasquatch</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="static/js/add-sighting.js"></script>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark" id="navbar" style="background-color: #000000;">
+  <a class="navbar-brand abs" href="#">Seeking Sasquatch</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="collapsingNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/map">Return to map</a>
+        </li>
+        {% if "user_id" in session %}
+        <li class="nav-item">
+        <a class="nav-link" href="/add-sighting">Record a sighting</a>
+        </li>
+        {% endif %}
+      
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          {% if "user_id" in session %}
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Log out</a>
+            </li>
+                {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Log in</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register">Sign up</a>
+            </li>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+  </nav>
+
+    <h1>Record a sighting</h1>
+    <div>
+        {% for flash in get_flashed_messages() %}
+        {{ flash }}
+        {% endfor %}
+    </div>
+
+<form action="/add_sighting" method="POST" enctype="multipart/form-data">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+  <div>
+    <label>Description:</label><br>
+      <textarea name="description" rows="15" cols="50" placeholder="Tell us what you saw."></textarea>
+  </div>  
+  
+  <div>
+    <label>Date:
+      <input name="date" type="text" id="datepicker" required>
+    </label>
+  </div>
+      </div>
+
+      <div class="col-6">
+  <div id="dropbox">
+    <div class="form_line">
+      <div class="form_controls">
+        <div class="upload_button_holder">
+          <input type="file" id="fileElem" accept="image/*" style="display:none" onchange="handleFiles(this.files)"><a href="#" id="fileSelect">Click, or drag and drop to upload an image.</a>
+          <input type="hidden" name="new_img" id="new_img" value="replace_url">
+          <input type="hidden" name="new_lat" id="new_lat" value="replace_val">
+          <input type="hidden" name="new_lng" id="new_lng" value="replace_val">
+        </div>
+      </div>
+    </div>
+    <div class="progress-bar" id="progress-bar">
+    <div class="progress" id="progress"></div>
+    </div>
+    <div id="gallery"></div>
+  </div>
+
+  <div id="map-selector"></div>
+      </div>
+
+  <input type="submit" value="Submit"/>
+    </div>
+  </div>
+</form>
+    
+    <!-- Init map, so user can place marker -->
+    <!-- Save marker coordinates to variable accessible by flask -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0RxTzsXse4XH81LWBShYzv8gyLynrWuE&callback=initMap"></script>
+</body>
+</html>
