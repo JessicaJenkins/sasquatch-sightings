@@ -13,6 +13,13 @@ app.secret_key = "this-is-my-bigfoot"
 app.jinja_env.undefined = StrictUndefined
 
 
+@app.route("/")
+def show_homepage():
+    """Shows visitor the homepage"""
+
+    return render_template("homepage.html")
+
+
 @app.route("/register")
 def register_form():
     """Shows signup form for new user"""
@@ -70,6 +77,7 @@ def log_in_user():
 
     return redirect("/map")
 
+
 @app.route("/logout")
 def logout():
     """Signs a user out of the session."""
@@ -83,7 +91,6 @@ def display_map():
     """Displays Google Map with markers."""
 
     return render_template("map.html")
-
 
 
 @app.route("/api/sightings")
@@ -141,7 +148,7 @@ def add_new_sighting():
     db.session.add(new_sighting)
     db.session.commit()
 
-    return redirect("/")
+    return redirect("/map")
 
 
 @app.route("/sighting/<sighting_id>")
