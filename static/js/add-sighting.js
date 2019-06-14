@@ -15,6 +15,13 @@ function initMap() {
   let map = new google.maps.Map(document.getElementById('map-selector'), {
     center: {lat: 46.383744, lng: -122.278250},
     zoom: 6,
+    streetViewControl: false,
+    mapTypeControl: false,
+    fullscreenControl: false,
+    zoomControl: true,
+    zoomControlOptions: {
+        position: google.maps.ControlPosition.TOP_RIGHT
+    },
     styles: [
   {
     "elementType": "geometry",
@@ -229,8 +236,7 @@ function placeMarkerAndPanTo(latLng, map) {
     map: map,
     draggable: true,
     icon: {
-          url: '/static/images/white-marker.png',
-          scaledSize: new google.maps.Size(50, 50)
+          url: '/static/images/ss-footplacer.png'
         }
   });
   map.panTo(latLng);

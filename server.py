@@ -103,12 +103,21 @@ def show_sightings():
     for sighting in sightings:
         if not sighting.lat:
             continue
+        
+        if not sighting.image:
+            sighting.image = "https://res.cloudinary.com/seeking-sasquatch/image/upload/v1560317868/bf-default_rgulup.png"
+        else:
+            sighting.image = sighting.image
+
+        print(sighting.image)
+
         sightings_dict = {
             "sightingId": sighting.sighting_id,
             "userID": sighting.user_id,
             "sightingLat": sighting.lat,
             "sightingLng": sighting.lng,
-            "sightingDate": sighting.date.strftime("%A, %b %d, %Y")
+            "sightingDate": sighting.date.strftime("%A, %b %d, %Y"),
+            "sightingImage": sighting.image
             }
 
         returned.append(sightings_dict)

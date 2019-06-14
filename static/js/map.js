@@ -224,7 +224,7 @@ function initMap() {
         position: new google.maps.LatLng(sighting.sightingLat, sighting.sightingLng),
         map: map,
         icon: {
-          url: '/static/images/white-marker.png',
+          url: 'static/images/ss-foot.png',
           scaledSize: new google.maps.Size(50, 50)
         }
       });
@@ -235,16 +235,13 @@ function initMap() {
       const html = `<div class="window-content">
         <div class="sasquatch-thumbnail">
           <img
-            src="/static/img/FILL_THIS_IN"
-            alt="sasquatch"
-          >
+            src=${sighting.sightingImage}
+            alt="sasquatch" style="width: 100px; height: auto;">
         </div>
-        <ul class="sighting-info">
-          <li><b>Date: </b>${sighting.sightingDate}</li>
-          <li><b>Description: </b><a href = '/sighting/${sighting.sightingId}'>
-          Sighting description</a>
-          </li>
-        </ul>
+        <div class="sighting-info">
+          <br><b>Date: </b>${sighting.sightingDate}
+          <br><a href = '/sighting/${sighting.sightingId}'>
+          Description of the event</a>
       </div>`;
 
       google.maps.event.addListener(marker, 'click', () => {
@@ -257,7 +254,7 @@ function initMap() {
   // Edit imagePath after final bigfoot 'foot' is added to images folder
 
   const markerCluster = new MarkerClusterer(map, markers,
-    {imagePath: 'static/images/white-marker'});
+    {imagePath: 'static/images/ss-footprint'});
 
   });
 }
