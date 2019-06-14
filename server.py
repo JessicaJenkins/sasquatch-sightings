@@ -1,5 +1,6 @@
 import requests
 import datetime
+import info
 from jinja2 import StrictUndefined
 from flask import Flask, jsonify, render_template, request, flash, redirect, session, Markup
 from flask_debugtoolbar import DebugToolbarExtension
@@ -9,7 +10,7 @@ from model import connect_to_db, db, Sightings, User
 
 app = Flask(__name__)
 
-app.secret_key = "this-is-my-bigfoot"
+app.secret_key = things[flask_key]
 app.jinja_env.undefined = StrictUndefined
 
 
