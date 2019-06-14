@@ -10,7 +10,7 @@ from model import connect_to_db, db, Sightings, User
 
 app = Flask(__name__)
 
-app.secret_key = things[flask_key]
+app.secret_key = info.things["flask_key"]
 app.jinja_env.undefined = StrictUndefined
 
 
