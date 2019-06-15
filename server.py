@@ -110,8 +110,6 @@ def show_sightings():
         else:
             sighting.image = sighting.image
 
-        print(sighting.image)
-
         sightings_dict = {
             "sightingId": sighting.sighting_id,
             "userID": sighting.user_id,
