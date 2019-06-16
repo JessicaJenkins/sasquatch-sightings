@@ -2,6 +2,7 @@ import requests
 import datetime
 import info
 from jinja2 import StrictUndefined
+from passlib.hash import argon2
 from flask import Flask, jsonify, render_template, request, flash, redirect, session, Markup
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -34,6 +35,7 @@ def register_process():
     name = request.form.get("name")
     email = request.form.get("email")
     password = request.form.get("password")
+    password = argon2.hash(password)
 
     existing_user = User.query.filter_by(email=email).first()
 
@@ -68,7 +70,7 @@ def log_in_user():
     """Signs in existing user, or prompts them to sign up."""
 
     email = request.form.get("email")
-    password = request.form.get("password")
+    temp_pass = request.form.get("password")
 
     user = User.query.filter_by(email=email).first()
 
@@ -76,13 +78,12 @@ def log_in_user():
         flash("No account found with that email address.")
         return redirect("/login")
 
-    if user.password != password:
+    if argon2.verify(temp_pass, user.password) == False:
         flash("Password incorrect")
         return redirect("/login")
-
-    session["user_id"] = user.user_id
-
-    return redirect("/map")
+    else:
+        session["user_id"] = user.user_id
+        return redirect("/map")
 
 
 @app.route("/logout")

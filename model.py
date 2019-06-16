@@ -12,7 +12,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(64))
     email = db.Column(db.String(100), nullable=False)
-    password = db.Column(db.String(64), nullable=False)
+    password = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
         """Prints readable info about users"""
