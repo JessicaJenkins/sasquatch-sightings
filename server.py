@@ -46,7 +46,13 @@ def register_process():
         db.session.add(new_user)
         db.session.commit()
 
-        flash("Thanks for signing up!")
+        user = User.query.filter_by(email=email).first()
+        
+        session["user_id"] = user.user_id
+
+        print(user.user_id)
+        print(session)
+
         return redirect("/map")
 
 
@@ -169,6 +175,8 @@ def show_event_details(sighting_id):
 
 if __name__ == "__main__":
     
+    app.debug = True
+
     connect_to_db(app)
     # DebugToolbarExtension(app)
 

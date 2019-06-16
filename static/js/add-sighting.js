@@ -3,8 +3,14 @@
 // JS FOR DATEPICKER
 
 $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
+    $( "#datepicker" ).datepicker({
+      showOn: "button",
+      buttonImage: "static/images/calendarbutton.png",
+      buttonImageOnly: true,
+      buttonText: "Select date",
+      dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    });
+} );
 
 // JS FOR MAP
 
