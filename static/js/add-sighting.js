@@ -366,7 +366,7 @@ function uploadFile(file) {
 
 // *********** Handle selected files ******************** //
 
-var handleFiles = function(files) {
+let handleFiles = function(files) {
   for (var i = 0; i < files.length; i++) {
     uploadFile(files[i]); // call the function to upload the file
   }
