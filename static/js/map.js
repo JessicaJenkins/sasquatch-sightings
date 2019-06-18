@@ -239,9 +239,9 @@ function initMap() {
             alt="sasquatch" style="width: 100px; height: auto;">
         </div>
         <div class="sighting-info">
-          <br><b>Date: </b>${sighting.sightingDate}
+          <br><b></b>${sighting.sightingDate}
           <br><a href = '/sighting/${sighting.sightingId}'>
-          Description of the event</a>
+          CLICK TO VIEW THE DESCRIPTION</a>
       </div>`;
 
       google.maps.event.addListener(marker, 'click', () => {

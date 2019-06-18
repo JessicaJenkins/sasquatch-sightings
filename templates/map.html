@@ -8,6 +8,7 @@
 <title>Seeking Sasquatch</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Fjalla+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/style.css">
   <script src="https://code.jquery.com/jquery.js"></script>
   <script async src="/static/js/map.js"></script>
@@ -15,18 +16,18 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark" id="navbar" style="background-color: #000000;">
-    <a class="navbar-brand abs" href="/">Seeking Sasquatch</a>
+    <a class="navbar-brand abs" href="/">SEEKING SASQUATCH</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-collapse collapse" id="collapsingNavbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/map">View map</a>
+                <a class="nav-link" href="/map">VIEW MAP</a>
             </li>
             {% if "user_id" in session %}
             <li class="nav-item">
-                <a class="nav-link" href="/add-sighting">Record a sighting</a>
+                <a class="nav-link" href="/add-sighting">RECORD A SIGHTING</a>
             </li>
             {% endif %}
             
@@ -34,14 +35,14 @@
         <ul class="navbar-nav ml-auto">
           {% if "user_id" in session %}
             <li class="nav-item">
-              <a class="nav-link" href="/logout">Log out</a>
+              <a class="nav-link" href="/logout">LOG OUT</a>
             </li>
                 {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="/login">Log in</a>
+              <a class="nav-link" href="/login">LOG IN</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/register">Sign up</a>
+              <a class="nav-link" href="/register">SIGN UP</a>
             </li>
                 {% endif %}
             </li>

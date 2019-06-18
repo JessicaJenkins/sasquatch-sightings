@@ -1,5 +1,6 @@
 #homepage-text {
   color: white;
+  font-family: 'Fjalla One', sans-serif;
   font-size: 25px;
   margin: 25px;
 }
@@ -23,12 +24,20 @@
   padding: 0px;
   margin: 40px;
   cursor: pointer;
+  font-family: 'Fjalla One', sans-serif;
   font-size: 20px;
 }
 
 .homepage-button:hover {
   text-decoration: none;
   color: black;
+}
+
+.navbar-brand {
+    position: relative;
+    background: url(https://res.cloudinary.com/seeking-sasquatch/image/upload/v1560233026/ss-bg-logo-homepage_eldav6.png);
+    max-height: 70px;
+    width: auto;
 }
 
 /* Always set the map height explicitly to define the size of the div
@@ -49,15 +58,26 @@ html, body {
 
 h1, h2, h3 {
   color: white;
+  font-family: 'Fjalla One', sans-serif;
 }
 
 a {
   color: #1b1b1b;
+  font-family: 'Fjalla One', sans-serif;
 }
 
 a:hover {
   color: #1b1b1b;
   text-decoration: underline;
+}
+
+.submit-button {
+  font-family: 'Fjalla One', sans-serif;
+  padding: 5px 10px;
+}
+
+.form-control {
+  font-family: 'Fjalla One', sans-serif;
 }
 
 #map-selector {
