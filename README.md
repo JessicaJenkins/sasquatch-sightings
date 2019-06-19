@@ -1,6 +1,6 @@
 # Seeking Sasquatch
 
-##Summary
+## Summary
 
 Deployed at: www.seeking-sasquatch.com
 
@@ -8,11 +8,11 @@ Deployed at: www.seeking-sasquatch.com
 
 Those lucky enough to site the elusive Bigfoot can create an account to record the location, description, and an image they took documenting their own experience.
 
-##About the Developer
+## About the Developer
 
 Jessica Jenkins (they/them) is an artist and software engineer based in the Bay Area. You can learn more about them on [LinkedIn](https://www.linkedin.com/in/jessicarjenkins/)
 
-##Technologies
+## Technologies
 
 Python, Flask, SQLAlchemy, Jinja2, JavaScript, JQuery, AJAX, JSON, HTML, CSS, Bootstrap
 
